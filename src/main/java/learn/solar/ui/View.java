@@ -75,7 +75,7 @@ public class View {
     }
 
     private void printPanel(Panel panel) {
-        System.out.printf("%s. section: %s, row: %s, column: %s, year_installed: %s, type: %s, is_tracking: %s",
+        System.out.printf("%s. section: %s, row: %s, column: %s, year_installed: %s, type: %s, is_tracking: %s%n",
                 panel.getPanelId(),
                 panel.getSection(),
                 panel.getRow(),
