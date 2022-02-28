@@ -4,9 +4,9 @@ public enum MenuOption {
     EXIT("Exit"),
     DISPLAY_ALL("Display All Panels"),
     DISPLAY_BY_TYPE("Display Panels By Type"),
-    ADD("Add An Panel"),
-    UPDATE("Update an Panel"),
-    DELETE("Delete an Panel");
+    ADD("Add A Panel"),
+    UPDATE("Update A Panel"),
+    DELETE("Delete A Panel");
 
     private String message;
 

@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class PanelResult {
-// TODO: make sure Result object aligns to new model
     private ArrayList<String> messages = new ArrayList<>();
     private Panel payload;
 

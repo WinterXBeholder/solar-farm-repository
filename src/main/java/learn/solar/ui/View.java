@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class View {
-
+// TODO: update view to match model
     private Scanner console = new Scanner(System.in);
 
     public MenuOption displayMenuGetOption() {
@@ -75,12 +75,14 @@ public class View {
     }
 
     private void printPanel(Panel panel) {
-        System.out.printf("%s. Type:%s, Row:%s, When:%s, Desc:%s%n",
+        System.out.printf("%s. section: %s, row: %s, column: %s, year_installed: %s, type: %s, is_tracking: %s",
                 panel.getPanelId(),
-                panel.getType(),
+                panel.getSection(),
                 panel.getRow(),
-                panel.getWhen(),
-                panel.getSection());
+                panel.getColumn(),
+                panel.getYearInstalled(),
+                panel.getType(),
+                panel.getIsTracking());
     }
 
     public void printResult(PanelResult result, String successMessageTemplate) {
@@ -99,10 +101,12 @@ public class View {
     public Panel makePanel() {
         printHeader(MenuOption.ADD.getMessage());
         Panel panel = new Panel();
-        panel.setType(readType());
-        panel.setRow(readInt("Number of row:"));
-        panel.setWhen(readRequiredString("When:"));
         panel.setSection(readRequiredString("Section:"));
+        panel.setRow(readInt("Number of row:"));
+        panel.setColumn(readInt("Number of column:"));
+        panel.setYearInstalled(readInt("Year installed:"));
+        panel.setType(readType());
+        panel.setIsTracking(readInt("Tracking the sun? [1:true, 2:false]:")==1); //TODO: make dedicated readBool()?
         return panel;
     }
 
@@ -110,11 +114,13 @@ public class View {
         System.out.println();
         printPanel(panel);
         System.out.println();
-        // TODO how can we improve this user experience?
-        panel.setType(readType());
-        panel.setRow(readInt("Number of row:"));
-        panel.setWhen(readRequiredString("When:"));
+        // TODO: allow users to skip re-typing fields they don't want to update
         panel.setSection(readRequiredString("Section:"));
+        panel.setRow(readInt("Number of row:"));
+        panel.setColumn(readInt("Number of column:"));
+        panel.setYearInstalled(readInt("Year installed:"));
+        panel.setType(readType());
+        panel.setIsTracking(readInt("Tracking the sun? [1:true, 2:false]:")==1);
         return panel;
     }
 

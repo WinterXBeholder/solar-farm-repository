@@ -59,8 +59,9 @@ public class PanelFileRepository implements PanelRepository {
                 .collect(Collectors.toList());
     }
 
+    //TODO: implement findByID for users. 1.PanelService
     @Override
-    public Panel findById(int panelId) throws DataAccessException {
+    public Panel findById(int panelId) throws DataAccessException { //tested, but not implemented
         List<Panel> panels = findAll();
         for (Panel panel : panels) {
             if (panel.getPanelId() == panelId) {
@@ -112,7 +113,7 @@ public class PanelFileRepository implements PanelRepository {
         }
         return nextId + 1;
     }
-
+//TODO: Sort panels by section->row->column for reduced reading?
     private void writeAll(List<Panel> panels) throws DataAccessException {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             writer.println(HEADER);

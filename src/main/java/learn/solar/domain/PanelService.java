@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class PanelService {
-// TODO: update Service to align with new model
     private final PanelRepository repository;
 
     public PanelService(PanelRepository repository) {
@@ -76,26 +75,32 @@ public class PanelService {
             return result;
         }
 
-        if (panel.getWhen() == null || panel.getWhen().trim().length() == 0) {
-            result.addErrorMessage("when is required");
-        }
-
         if (panel.getSection() == null || panel.getSection().trim().length() == 0) {
             result.addErrorMessage("section is required");
         }
 
-        if (panel.getRow() <= 0) {
-            result.addErrorMessage("row must be greater than 0");
+        if (panel.getRow() <= 0 || panel.getRow() > 250) {
+            result.addErrorMessage("row must be greater than 0 and less than 250");
         }
+        if (panel.getColumn() <= 0 || panel.getColumn() > 250) {
+            result.addErrorMessage("column must be greater than 0 and less than 250");
+        }
+//TODO: implement dynamic year
+        if (panel.getYearInstalled() > 2022) {
+            result.addErrorMessage("year installed cannot be in the future");
+        }
+        // Enum verification and isTracking verification not really necessary: handled by View
+
 
         // check for duplicate
         List<Panel> panels = repository.findAll();
         for (Panel e : panels) {
             if (!Objects.equals(panel.getPanelId(), e.getPanelId())
-                    && Objects.equals(panel.getWhen(), e.getWhen())
-                    && Objects.equals(panel.getType(), e.getType())
-                    && Objects.equals(panel.getSection(), e.getSection())) {
-                result.addErrorMessage("duplicate panel is not allowed");
+                    && Objects.equals(panel.getSection(), e.getSection())
+                    && (panel.getRow() == e.getRow())
+                    && (panel.getColumn() == e.getColumn())
+                    ) {
+                result.addErrorMessage("this Section-Row-Column combination is already occupied");
                 break;
             }
         }

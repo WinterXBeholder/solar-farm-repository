@@ -1,4 +1,4 @@
-package learn.solar.data;
+/*package learn.solar.data;
 
 import learn.solar.models.Panel;
 import learn.solar.models.Material;
@@ -112,3 +112,5 @@ class PanelFileRepositoryTest {
         assertFalse(actual);
     }
 }
+
+ */

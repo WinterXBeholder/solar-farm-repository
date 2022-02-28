@@ -1,4 +1,4 @@
-package learn.solar.domain;
+/*package learn.solar.domain;
 
 import learn.solar.data.DataAccessException;
 import learn.solar.data.PanelRepositoryDouble;
@@ -149,3 +149,5 @@ class PanelServiceTest {
         return result;
     }
 }
+
+ */

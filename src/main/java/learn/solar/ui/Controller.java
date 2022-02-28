@@ -19,7 +19,7 @@ public class Controller {
     }
 
     public void run() {
-        view.printHeader("Welcome To Unexplained Panels.");
+        view.printHeader("Welcome To Solar Panel Manager.");
 
         try {
             runMenuLoop();
