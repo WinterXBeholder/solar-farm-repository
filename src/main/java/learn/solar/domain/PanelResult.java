@@ -1,21 +1,21 @@
-package learn.unexplained.domain;
+package learn.solar.domain;
 
-import learn.unexplained.models.Encounter;
+import learn.solar.models.Panel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class EncounterResult {
-
+public class PanelResult {
+// TODO: make sure Result object aligns to new model
     private ArrayList<String> messages = new ArrayList<>();
-    private Encounter payload;
+    private Panel payload;
 
-    public Encounter getPayload() {
+    public Panel getPayload() {
         return payload;
     }
 
-    public void setPayload(Encounter payload) {
+    public void setPayload(Panel payload) {
         this.payload = payload;
     }
 
@@ -35,7 +35,7 @@ public class EncounterResult {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EncounterResult that = (EncounterResult) o;
+        PanelResult that = (PanelResult) o;
         return Objects.equals(messages, that.messages) &&
                 Objects.equals(payload, that.payload);
     }

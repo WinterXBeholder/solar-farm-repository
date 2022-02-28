@@ -1,3 +1,4 @@
-encounter_id,type,when,description,occurrences
+panel_id,type,when,section,row
 1,UFO,2020-02-01,this is an updated description,44
 3,VISION,2020-02-25,visions of my project completed,17
+4,UFO,23,2,2

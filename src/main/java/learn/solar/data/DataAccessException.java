@@ -1,4 +1,4 @@
-package learn.unexplained.data;
+package learn.solar.data;
 
 public class DataAccessException extends Exception {
 

@@ -1,8 +1,8 @@
-package learn.unexplained.ui;
+package learn.solar.ui;
 
-import learn.unexplained.domain.EncounterResult;
-import learn.unexplained.models.Encounter;
-import learn.unexplained.models.EncounterType;
+import learn.solar.domain.PanelResult;
+import learn.solar.models.Panel;
+import learn.solar.models.Material;
 
 import java.util.List;
 import java.util.Scanner;
@@ -34,59 +34,59 @@ public class View {
         System.out.println(message);
     }
 
-    public void printAllEncounters(List<Encounter> encounters) {
+    public void printAllPanels(List<Panel> panels) {
         printHeader(MenuOption.DISPLAY_ALL.getMessage());
-        printEncounters(encounters);
+        printPanels(panels);
     }
 
-    public void printEncountersByType(List<Encounter> encounters, EncounterType encounterType) {
-        printHeader(MenuOption.DISPLAY_BY_TYPE.getMessage() + ": " + encounterType);
-        printEncounters(encounters);
+    public void printPanelsByType(List<Panel> panels, Material panelType) {
+        printHeader(MenuOption.DISPLAY_BY_TYPE.getMessage() + ": " + panelType);
+        printPanels(panels);
     }
 
-    public Encounter selectEncounter(List<Encounter> encounters) {
-        printEncounters(encounters);
-        int encounterId = readInt("Enter an encounter ID: ");
+    public Panel selectPanel(List<Panel> panels) {
+        printPanels(panels);
+        int panelId = readInt("Enter an panel ID: ");
 
-        Encounter selectedEncounter = null;
-        for (Encounter encounter : encounters) {
-            if (encounter.getEncounterId() == encounterId) {
-                selectedEncounter = encounter;
+        Panel selectedPanel = null;
+        for (Panel panel : panels) {
+            if (panel.getPanelId() == panelId) {
+                selectedPanel = panel;
                 break;
             }
         }
 
-        if (selectedEncounter == null) {
-            printMessage("Encounter not found.");
+        if (selectedPanel == null) {
+            printMessage("Panel not found.");
         }
 
-        return selectedEncounter; // returns null if we didn't find an encounter
+        return selectedPanel; // returns null if we didn't find an panel
     }
 
-    private void printEncounters(List<Encounter> encounters) {
-        if (encounters == null || encounters.size() == 0) {
+    private void printPanels(List<Panel> panels) {
+        if (panels == null || panels.size() == 0) {
             System.out.println();
-            System.out.println("No encounters found.");
+            System.out.println("No panels found.");
         } else {
-            for (Encounter e : encounters) {
-                printEncounter(e);
+            for (Panel e : panels) {
+                printPanel(e);
             }
         }
     }
 
-    private void printEncounter(Encounter encounter) {
-        System.out.printf("%s. Type:%s, Occurrences:%s, When:%s, Desc:%s%n",
-                encounter.getEncounterId(),
-                encounter.getType(),
-                encounter.getOccurrences(),
-                encounter.getWhen(),
-                encounter.getDescription());
+    private void printPanel(Panel panel) {
+        System.out.printf("%s. Type:%s, Row:%s, When:%s, Desc:%s%n",
+                panel.getPanelId(),
+                panel.getType(),
+                panel.getRow(),
+                panel.getWhen(),
+                panel.getSection());
     }
 
-    public void printResult(EncounterResult result, String successMessageTemplate) {
+    public void printResult(PanelResult result, String successMessageTemplate) {
         if (result.isSuccess()) {
             if (result.getPayload() != null) {
-                System.out.printf(successMessageTemplate, result.getPayload().getEncounterId());
+                System.out.printf(successMessageTemplate, result.getPayload().getPanelId());
             }
         } else {
             printHeader("Errors");
@@ -96,26 +96,26 @@ public class View {
         }
     }
 
-    public Encounter makeEncounter() {
+    public Panel makePanel() {
         printHeader(MenuOption.ADD.getMessage());
-        Encounter encounter = new Encounter();
-        encounter.setType(readType());
-        encounter.setOccurrences(readInt("Number of occurrences:"));
-        encounter.setWhen(readRequiredString("When:"));
-        encounter.setDescription(readRequiredString("Description:"));
-        return encounter;
+        Panel panel = new Panel();
+        panel.setType(readType());
+        panel.setRow(readInt("Number of row:"));
+        panel.setWhen(readRequiredString("When:"));
+        panel.setSection(readRequiredString("Section:"));
+        return panel;
     }
 
-    public Encounter updateEncounter(Encounter encounter) {
+    public Panel updatePanel(Panel panel) {
         System.out.println();
-        printEncounter(encounter);
+        printPanel(panel);
         System.out.println();
         // TODO how can we improve this user experience?
-        encounter.setType(readType());
-        encounter.setOccurrences(readInt("Number of occurrences:"));
-        encounter.setWhen(readRequiredString("When:"));
-        encounter.setDescription(readRequiredString("Description:"));
-        return encounter;
+        panel.setType(readType());
+        panel.setRow(readInt("Number of row:"));
+        panel.setWhen(readRequiredString("When:"));
+        panel.setSection(readRequiredString("Section:"));
+        return panel;
     }
 
     private String readString(String message) {
@@ -163,14 +163,14 @@ public class View {
     }
 
     // This is pretty helpful... maybe bookmark this :)
-    public EncounterType readType() {
+    public Material readType() {
         int index = 1;
-        // Print encounter type enum values...
-        for (EncounterType type : EncounterType.values()) {
+        // Print panel type enum values...
+        for (Material type : Material.values()) {
             System.out.printf("%s. %s%n", index++, type);
         }
         index--;
-        String msg = String.format("Select Encounter Type [1-%s]:", index);
-        return EncounterType.values()[readInt(msg, 1, index) - 1];
+        String msg = String.format("Select Panel Type [1-%s]:", index);
+        return Material.values()[readInt(msg, 1, index) - 1];
     }
 }
