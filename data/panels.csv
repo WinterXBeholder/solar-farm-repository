@@ -1,2 +1,4 @@
 panel_id,section, row, column, year_installed, type, is_tracking
 1,Hill,1,1,199,COPPER_INDIUM_GALLIUM_SELENIDE,true
+2,Hill,1,2,2000,CADMIUM_TELLURIDE,true
+3,Shore,2,1,2022,MULTICRYSTALLINE_SILICON,false
