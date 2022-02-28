@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PanelFileRepository implements PanelRepository {
-// TODO: update File Repository for new Panel model
     private static final String DELIMITER = ",";
     private static final String DELIMITER_REPLACEMENT = "@@@";
     private static final String HEADER = "panel_id,section, row, column, year_installed, type, is_tracking";
@@ -126,23 +125,29 @@ public class PanelFileRepository implements PanelRepository {
     }
 
     private String serialize(Panel panel) {
-        return String.format("%s,%s,%s,%s,%s",
+        return String.format("%s,%s,%s,%s,%s,%s,%s",
                 panel.getPanelId(),
-                panel.getType(),
-                clean(panel.getWhen()),
                 clean(panel.getSection()),
-                panel.getRow());
+                panel.getRow(),
+                panel.getColumn(),
+                panel.getYearInstalled(),
+                panel.getType(),
+                panel.getIsTracking());
     }
 
     private Panel deserialize(String line) {
         String[] fields = line.split(DELIMITER, -1);
         if (fields.length == 5) {
             Panel panel = new Panel();
+
             panel.setPanelId(Integer.parseInt(fields[0]));
-            panel.setType(Material.valueOf(fields[1]));
-            panel.setWhen(restore(fields[2]));
-            panel.setSection(restore(fields[3]));
-            panel.setRow(Integer.parseInt(fields[4]));
+            panel.setSection(restore(fields[1]));
+            panel.setRow(Integer.parseInt(fields[2]));
+            panel.setColumn(Integer.parseInt(fields[3]));
+            panel.setYearInstalled(Integer.parseInt(fields[4]));
+            panel.setType(Material.valueOf(fields[5]));
+            panel.setIsTracking(Boolean.parseBoolean(fields[6]));
+
             return panel;
         }
         return null;
