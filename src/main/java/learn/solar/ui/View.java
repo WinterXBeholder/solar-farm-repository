@@ -120,7 +120,7 @@ public class View {
         panel.setColumn(readInt("Number of column:"));
         panel.setYearInstalled(readInt("Year installed:"));
         panel.setType(readType());
-        panel.setIsTracking(readInt("Tracking the sun? [1:true, 2:false]:")==1);
+        panel.setIsTracking(readInt("Tracking the sun? [1:true, 2:false]:", 1, 2)==1);
         return panel;
     }
 

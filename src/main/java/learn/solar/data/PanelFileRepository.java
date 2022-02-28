@@ -138,7 +138,7 @@ public class PanelFileRepository implements PanelRepository {
 
     private Panel deserialize(String line) {
         String[] fields = line.split(DELIMITER, -1);
-        if (fields.length == 5) {
+        if (fields.length == 7) {
             Panel panel = new Panel();
 
             panel.setPanelId(Integer.parseInt(fields[0]));
