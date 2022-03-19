@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Define beans here.-->
+    <bean id="panelRepository" class="learn.solar.data.PanelFileRepository">
+        <!-- File path to the data file. -->
+        <constructor-arg value="./data/panels.csv"/>
+    </bean>
+    <!-- Service -->
+    <bean id="panelService" class="learn.solar.domain.PanelService">
+        <!-- ref points to the configured repository using its id. -->
+        <constructor-arg ref="panelRepository"/>
+    </bean>
+    <!-- View -->
+    <bean id="view" class="learn.solar.ui.View"/>
+    <!-- No constructor arguments required. -->
+    <!-- Controller -->
+    <bean class="learn.solar.ui.Controller">
+        <constructor-arg ref="panelService"/>
+        <constructor-arg ref="view"/>
+    </bean>
+
+</beans>
